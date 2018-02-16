@@ -1,0 +1,6 @@
+[submodule "gexnet"]
+	path = gexnet
+	url = https://github.com/Amorph/gexnet.git
+[submodule "gexnetpy"]
+	path = gexnetpy
+	url = https://github.com/Amorph/gexnetpy.git
