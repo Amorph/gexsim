@@ -3,6 +3,13 @@ from threading import Thread
 
 import time
 
+import gexnetpy
+
+net = gexnetpy.network_create(10, 10)
+net = None
+net = gexnetpy.Network(1, 2)
+net = None
+
 from simulation.base import BaseSimulation
 from simulation.grid import FoodFindSimulation
 from view.pygame.init import PyGameView
