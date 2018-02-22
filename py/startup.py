@@ -5,7 +5,15 @@ import time
 
 import gexnetpy
 
-net = gexnetpy.network_create(10, 10)
+net = gexnetpy.network_create(2, 4)
+net.nodes[0].bias = 0.3
+net.nodes[1].bias = 0.3
+for n in net.nodes:
+    print(type(n.bias))
+if net.links[0].input == gexnetpy.NULL_LINK:
+    net.links[0].input = 0
+    net.links[0].output = 1
+
 net = None
 net = gexnetpy.Network(1, 2)
 net = None
