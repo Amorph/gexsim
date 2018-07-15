@@ -3,7 +3,38 @@ from threading import Thread
 
 import time
 
-import gexnetpy
+import gexnetpy as GN
+
+G = GN.GNSystem()
+
+test_links = [
+    (0, 3),
+    (1, 3),
+    (2, 3),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (5, 6),
+    (4, 6),
+    (3, 6)
+]
+links = G.create_stream_data(GN.GN_TYPE_LINK, test_links)
+node_count = G.compute_node_count(links)
+inputs, outputs = G.compute_in_out(links, node_count)
+lock0 = inputs.lock(0, 0, 0)
+lock1 = outputs.lock(0, 0, 0)
+lock0.unlock()
+lock1.unlock()
+
+#stream = G.create_stream_data(GN.GN_TYPE_NUMBER, [1.5, 2.5, 3.5, 4.5, 5.5])
+stream = G.create_stream_data(GN.GN_TYPE_INDEX, [1, 2, 3, 4, 5])
+#stream = G.create_stream_data(GN.GN_TYPE_LINK, [(1, 2), (2, 3), (3, 4)])
+lock = stream.lock(0, 0, 0)
+for i in range(lock.count):
+    lock.data[i] += 1
+lock.unlock()
+lock = stream.lock(0, 0, 0)
+
 
 net = gexnetpy.network_create(2, 4)
 net.nodes[0].bias = 0.3
