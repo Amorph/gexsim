@@ -3,7 +3,15 @@ import gexnetpy as GN
 from nn.gnn import GNNet
 
 G = GN.GNSystem()
-nn = GNNet.create_random(G, 3, 1, 20)
+nn = GNNet.create_random(G, 3, 1, 5)
+
+for i in range(10):
+    print(nn.process([0.5, 0.5, 0.5]))
+    nn.back_propagate(0.15, [0.5])
+print('--------------------------------')
+for i in range(10):
+    print(nn.process([0.75, 0.75, 0.75]))
+    nn.back_propagate(0.15, [0.75])
 
 import gym
 import random
